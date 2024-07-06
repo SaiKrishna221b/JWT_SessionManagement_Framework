@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
 
+app.use(express.json())
+
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MDB_CONNECT);
@@ -21,3 +23,6 @@ const connectDB = async () => {
 };
 
 connectDB();
+
+app.use("/auth",require("./routers/userRouter"));
+app.use("/customer",require("./routers/customerRouter"))
