@@ -5,7 +5,7 @@ const jwt=require("jsonwebtoken")
 
 //Register User
 
-router.post("/",async(req, res)=>{
+router.post("/register",async(req, res)=>{
     try{
         const {email, pass, passVerify} = req.body;
 
