@@ -1,8 +1,8 @@
-// webpack.config.js
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development', // Set the mode to development
+    mode: 'development',
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -44,5 +44,12 @@ module.exports = {
         },
         compress: true,
         port: 8080,
+        historyApiFallback: true,
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+            filename: 'index.html'
+        })
+    ]
 };

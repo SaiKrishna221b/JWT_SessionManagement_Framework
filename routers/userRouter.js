@@ -7,12 +7,12 @@ const jwt=require("jsonwebtoken")
 
 router.post("/register",async(req, res)=>{
     try{
-        const {email, pass, passVerify} = req.body;
+        const {email, password, passwordVerify} = req.body;
 
-        if(!email || !pass || !passVerify)
+        if(!email || !password || !passwordVerify)
             return res.status(400).json({errorMessage: "Enter all fields"});
 
-        if(pass != passVerify)
+        if(password != passwordVerify)
             return res.status(400).json({errorMessage: "Passwords dont match"});
 
         const existingUser = await User.findOne({email});
@@ -23,7 +23,7 @@ router.post("/register",async(req, res)=>{
         //hash password
 
         const salt = await bcrypt.genSalt();
-        const passwordHash= await bcrypt.hash(pass,salt);
+        const passwordHash= await bcrypt.hash(password,salt);
 
         //save new user to db
 
@@ -61,10 +61,10 @@ router.post("/register",async(req, res)=>{
 router.post("/login", async(req,res) => {
 
     try{
-        const {email, pass} = req.body;
+        const {email, password} = req.body;
 
         //validate
-        if(!email || !pass)
+        if(!email || !password)
             return res.status(400).json({errorMessage: "Enter all fields"});
 
         const existingUser=await User.findOne({email});
