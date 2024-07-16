@@ -3,28 +3,27 @@ import React, { useContext, useState } from "react";
 
 
 
-function Register() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState("");
+  
 
 
-  async function register(e) {
+  async function login(e) {
     e.preventDefault();
 
     try {
-      const registerData = {
+      const loginData = {
         email,
         password,
-        passwordVerify,
+    
       };
 
-      console.log("Data being sent:", registerData);
+      console.log("Data being sent:", loginData);
       
       await axios.post(
-        "http://localhost:5000/user/register",
-        registerData,
-        {withCredentials: true}
+        "http://localhost:5000/user/login",
+        loginData
       );
      
     } catch (err) {
@@ -34,8 +33,8 @@ function Register() {
 
   return (
     <div>
-      <h1>Register a new account</h1>
-      <form onSubmit={register}>
+      <h1>Login to your account</h1>
+      <form onSubmit={login}>
         <input
           type="email"
           placeholder="Email"
@@ -48,16 +47,11 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        <input
-          type="password"
-          placeholder="Verify your password"
-          onChange={(e) => setPasswordVerify(e.target.value)}
-          value={passwordVerify}
-        />
-        <button type="submit">Register</button>
+        
+        <button type="submit">Log in</button>
       </form>
     </div>
   );
 }
 
-export default Register;
+export default Login;
